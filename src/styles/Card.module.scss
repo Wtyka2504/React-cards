@@ -1,0 +1,65 @@
+.card {
+  background-color: hsl(0, 0%, 20%);
+  border-radius: 0.5rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem hsla(0, 100%, 0%, 0.15);
+  transition: transform 250ms ease-in-out, box-shadow 250ms ease-in-out;
+  overflow: hidden;
+  margin: 1rem;
+  &:hover {
+    box-shadow: 0.35rem 0.35rem 0.6rem hsla(0, 100%, 0%, 0.35);
+    transform: scale(105%);
+  }
+  & > * {
+    padding: 1rem {
+      left: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+  &-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &__fullname {
+    font-size: 2rem;
+    & > *:first-child {
+      margin-right: 0.5rem;
+    }
+  }
+  &__avatar {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+  }
+  .rewards {
+    border-top: 2px solid;
+    &__item-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-areas: "bronze gold silver";
+      gap: 1rem;
+    }
+    &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      &--gold {
+        color: gold;
+        grid-area: gold;
+      }
+      &--silver {
+        color: silver;
+        grid-area: silver;
+      }
+      &--bronze {
+        color: brown;
+        grid-area: bronze;
+      }
+    }
+  }
+}
