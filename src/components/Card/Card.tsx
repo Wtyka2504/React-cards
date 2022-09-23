@@ -1,5 +1,5 @@
-import styles from "../styles/Card.module.scss";
-import ICard from "../interfaces/ICard";
+import styles from "./Card.module.scss";
+import ICard from "./TCard";
 export default ({ name, surname, avatar, rewards, background }: ICard) => {
   return (
     <div className={styles.card}>
