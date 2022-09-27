@@ -1,0 +1,13 @@
+@use "./styles/colors.scss";
+@import "./styles//fonts.scss";
+@import "./styles/reset.scss";
+
+body {
+  display: flex;
+  background-color: colors.$bg-dark;
+  font-family: "Poppins";
+}
+#root {
+  padding: 4rem;
+  margin: 0 auto;
+}

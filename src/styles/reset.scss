@@ -1,0 +1,43 @@
+:root {
+  font-size: 10px;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: unset;
+  margin: unset;
+}
+body {
+  font-size: 1.6rem;
+}
+ul {
+  padding: unset;
+  margin: unset;
+}
+li {
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: unset;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: {
+    start: 0.5rem;
+    end: 0.5rem;
+  }
+}
+button {
+  background-color: unset;
+  outline: unset;
+  border: unset;
+  color: inherit;
+  cursor: pointer;
+}

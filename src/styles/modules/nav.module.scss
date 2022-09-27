@@ -1,0 +1,20 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.link {
+  display: block;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  background-color: royalblue;
+  color: white;
+  font-size: 2rem;
+  border-radius: 1.2rem;
+  transition: 250ms ease-in-out opacity;
+  &:not(.active) {
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
