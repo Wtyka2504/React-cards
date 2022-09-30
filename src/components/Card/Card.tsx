@@ -1,4 +1,4 @@
-import styles from "./styles/card.module.scss";
+import styles from "./card.module.scss";
 import cx from "classnames";
 import type { TCard, TCardWrapper } from "./TCard";
 export function Card({ name, surname, avatar, rewards, background }: TCard) {

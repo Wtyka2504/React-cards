@@ -1,4 +1,4 @@
-export const footer = {
+export default {
   company: {
     addressLine1: "Brzozowa 23",
     addressLine2: "Katowice 40-000",

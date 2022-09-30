@@ -1,0 +1,118 @@
+.footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) 1.5fr;
+  gap: 2rem;
+  padding: 6rem;
+  background-color: #323232;
+  // grid-template-areas: "company contact links links" "company socials links links";
+  color: whitesmoke;
+  p {
+    padding: 0.5rem;
+  }
+}
+.columnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 1rem;
+}
+.link {
+  display: block;
+  padding: 0.5rem;
+}
+.fb {
+  color: #1877f2;
+}
+.twitter {
+  color: #1da1f2;
+}
+.instagram {
+  color: #c32aa3;
+}
+.unknown {
+  color: gray;
+}
+
+.contact {
+  grid-column: 2;
+  grid-row: 1;
+}
+//socials
+.socials {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.socialsList {
+  display: flex;
+}
+.socialsItem {
+  margin: 1rem;
+}
+
+.socialIcon {
+  & > * {
+    font-size: 4rem;
+  }
+}
+.socialIconName {
+  font-size: 2rem;
+  transition: 250ms ease-in-out color;
+}
+.socialsLink {
+  @extend .link;
+  &:hover .socialIconName {
+    color: cyan;
+  }
+}
+// links
+.links {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+.linksListWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1rem;
+}
+.linksList {
+}
+.linksItem {
+  margin: 0.5rem;
+}
+.linkLink {
+  @extend .link;
+  transition: 250ms ease-in-out color;
+  font-size: 1.5rem;
+  &:hover {
+    color: cyan;
+  }
+}
+//company
+.company {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+.logo {
+  display: block;
+  max-width: 200px;
+  max-height: 50px;
+  &.image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
+  }
+  &.empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    min-height: 50px;
+  }
+}

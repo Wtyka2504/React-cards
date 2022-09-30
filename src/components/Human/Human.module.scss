@@ -1,0 +1,36 @@
+.wrapper {
+  color: whitesmoke;
+  background-color: #323232;
+  padding: 2rem;
+  text-align: center;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn {
+  padding: 0.5rem;
+  margin: 1rem;
+  transition: 250ms ease-in-out background-color;
+  &Sex {
+    font-size: 1.8rem;
+    padding: 1rem 2rem;
+    background-color: royalblue;
+    border-radius: 1.5rem;
+    &:hover {
+      background-color: lighten(royalblue, 10%);
+    }
+  }
+  &Balance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    padding: 0.5rem;
+    background-color: darken(#323232, 5%);
+    &:hover {
+      background-color: darken(#323232, 10%);
+    }
+  }
+}

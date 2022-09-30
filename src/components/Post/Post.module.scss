@@ -1,0 +1,54 @@
+.wrapper {
+  width: 100%;
+}
+.grid {
+  --min: 350px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min), 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+.card {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background-color: darken(royalblue, 10%);
+  color: whitesmoke;
+  transition: 250ms ease-in-out background-color;
+  text-align: center;
+  &:hover {
+    background-color: royalblue;
+  }
+}
+.cardId {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.cardUserId {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.cardTitle {
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 1rem 0;
+}
+.cardBody {
+  font-size: 1.5rem;
+}
+.message {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .grid {
+    --min: 300px;
+    gap: 1rem;
+  }
+}
+@media (max-width: 800px) {
+  .grid {
+    --min: 220px;
+  }
+}

@@ -1,20 +1,29 @@
-import { useState } from "react";
 import { BrowserRouter, NavLink, Routes, Route } from "react-router-dom";
 import { CardWrapper } from "./components/Card/Card";
-import * as CardData from "./constants/cards";
+import { Menu } from "./components/Menu/Menu";
+import { FooterGeneric } from "./components/FooterGeneric/FooterGeneric";
+import { Link } from "./components/Link/Link";
+import { Human } from "./components/Human/Human";
+import { Post } from "./components/Post/Post";
+import CardData from "./constants/cards";
+import MenuData from "./constants/menu";
+import FooterData from "./constants/footer";
+import Tabledata from "./constants/table";
 import navStyles from "./styles/modules/nav.module.scss";
+import cx from "classnames";
+import { Table } from "./components/Table/Table";
 type TNav = {
   [path: string]: {
     name: string;
     element?: JSX.Element;
   };
 };
-const nav: TNav = {
-  "/": {
-    name: "Zadanie 1-3",
+const navObject: TNav = {
+  index: {
+    name: "Cards",
     element: (
       <CardWrapper>
-        {CardData.data.map(card => {
+        {CardData.map(card => {
           const { gold, bronze, silver } = card;
 
           return { ...card, rewards: { gold, bronze, silver } };
@@ -22,27 +31,55 @@ const nav: TNav = {
       </CardWrapper>
     ),
   },
+  menu: {
+    name: "Menu",
+    element: <Menu>{MenuData}</Menu>,
+  },
   footer: {
-    name: "Zadanie 4",
+    name: "Footer",
+    element: <FooterGeneric {...FooterData}></FooterGeneric>,
+  },
+  human: {
+    name: "Human",
+    element: <Human />,
+  },
+  post: {
+    name: "Posts",
+    element: <Post />,
+  },
+  table: {
+    name: "Table",
+    element: <Table data={Tabledata} />,
   },
 };
+
+const routesObject: TNav = {
+  ...navObject,
+};
+for (const { name, link } of MenuData) {
+  routesObject[name] = {
+    name,
+    element: (
+      <>
+        <Link href={"menu"} name="powrót" />
+        <span style={{ color: "whitesmoke", padding: "1rem" }}>{name}</span>
+      </>
+    ),
+  };
+}
 function App() {
-  const paths = Object.entries(nav);
+  const nav = Object.entries(navObject);
+  const routes = Object.entries(routesObject);
   return (
     <BrowserRouter>
-      <nav>
+      <nav className={navStyles.nav}>
         <ul className={navStyles.list}>
-          {paths.map(([path, { name }], index) => {
+          {nav.map(([to, { name }], index) => {
+            const className = ({ isActive }: { isActive: boolean }) =>
+              isActive ? cx(navStyles.link, navStyles.active) : navStyles.link;
             return (
               <li key={index}>
-                <NavLink
-                  to={path}
-                  className={({ isActive }) =>
-                    isActive
-                      ? [navStyles.link, navStyles.active].join(" ")
-                      : navStyles.link
-                  }
-                >
+                <NavLink {...{ className, to: to === "index" ? "/" : to }} end>
                   {name}
                 </NavLink>
               </li>
@@ -50,11 +87,24 @@ function App() {
           })}
         </ul>
       </nav>
-      <Routes>
-        {paths.map(([path, { element }], index) => {
-          return <Route path={path} element={element} key={index}></Route>;
-        })}
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/*">
+            {routes.map(([path, { element }], index) => {
+              const props = path === "index" ? { index: true } : { path };
+              return (
+                <Route
+                  {...{
+                    ...props,
+                  }}
+                  element={element}
+                  key={index}
+                ></Route>
+              );
+            })}
+          </Route>
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }

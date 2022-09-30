@@ -1,0 +1,10 @@
+.link {
+  display: inline-block;
+  font-size: inherit;
+  background-color: royalblue;
+  color: whitesmoke;
+  text-decoration: unset;
+  padding: 0.7rem 1.4rem;
+  border-radius: 0.8rem;
+  transition: 250ms background-color ease-in-out, 250ms opacity ease-in-out;
+}

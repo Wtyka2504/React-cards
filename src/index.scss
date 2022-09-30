@@ -3,11 +3,16 @@
 @import "./styles/reset.scss";
 
 body {
-  display: flex;
   background-color: colors.$bg-dark;
   font-family: "Poppins";
 }
 #root {
-  padding: 4rem;
+  height: 100%;
   margin: 0 auto;
+}
+main {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 4rem;
 }
