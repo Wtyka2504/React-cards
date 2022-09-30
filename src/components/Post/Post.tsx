@@ -46,7 +46,7 @@ export function Post() {
         }
       })
       .then(data => {
-        if (!Array.isArray(data)) return setMessage("Błędne dane");
+        if (!Array.isArray(data)) setMessage("Błędne dane");
         setPosts(data);
       })
       .catch(() => {
