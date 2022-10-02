@@ -1,1 +1,11 @@
-$bg-dark: #222;
+$color-dark: #222;
+$color-dark-lighter: lighten($color-dark, 5%);
+$color-dark-darker: darken($color-dark, 5%);
+
+$color-light: whitesmoke;
+$color-light-lighter: lighten($color-light, 5%);
+$color-light-darker: darken($color-light, 5%);
+
+$primary: royalblue;
+$primary-light: lighten($primary, 5%);
+$primary-dark: darken($primary, 5%);

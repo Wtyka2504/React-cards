@@ -1,13 +1,17 @@
+@use "../colors.scss";
+
 .nav {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 50% 1fr;
   width: 100%;
   padding: 1rem;
-  background-color: whitesmoke;
+  background-color: var(--color-light);
 }
 .list {
   display: flex;
   flex-wrap: wrap;
+  place-content: center;
+  grid-column: 2;
 }
 .link {
   display: block;

@@ -16,23 +16,29 @@ export function Human() {
   const { sex, surname, accountBalance } = { ...state, ...state.human };
   const amount = 500;
   const handleChangeSex = () =>
-    setState({
-      ...state,
-      human: {
-        ...state.human,
-        sex: state.human.sex === 0 ? 1 : 0,
-      },
+    setState(prev => {
+      return {
+        ...prev,
+        human: {
+          ...prev.human,
+          sex: prev.human.sex === 0 ? 1 : 0,
+        },
+      };
     });
 
   const handleBuy = () =>
-    setState({
-      ...state,
-      accountBalance: (state.accountBalance += amount),
+    setState(prev => {
+      return {
+        ...prev,
+        accountBalance: amount + prev.accountBalance,
+      };
     });
   const handleSell = () =>
-    setState({
-      ...state,
-      accountBalance: (state.accountBalance -= amount),
+    setState(prev => {
+      return {
+        ...prev,
+        accountBalance: (prev.accountBalance -= amount),
+      };
     });
   return (
     <div className={styles.wrapper}>

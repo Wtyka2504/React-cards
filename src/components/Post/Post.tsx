@@ -15,7 +15,7 @@ function Message({ text }: { text: string | undefined }) {
     </div>
   );
 }
-function Posts({ posts }: { posts: TPost[] }) {
+export function Posts({ posts }: { posts: TPost[] }) {
   return (
     <div className={styles.grid}>
       {posts.map(({ userId, id, title, body }, index) => {

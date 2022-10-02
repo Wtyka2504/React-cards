@@ -1,2 +1,12 @@
 .btn {
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  background-color: royalblue;
+  color: whitesmoke;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  transition: 250ms background-color ease-in-out;
+  &:hover {
+    background-color: lighten(royalblue, 10%);
+  }
 }

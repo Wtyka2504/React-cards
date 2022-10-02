@@ -1,6 +1,7 @@
+@use "../../styles/colors.scss";
 .wrapper {
-  color: whitesmoke;
-  background-color: #323232;
+  color: var(--color-light);
+  background-color: var(--color-dark-darker);
   padding: 2rem;
   text-align: center;
 }
@@ -10,16 +11,17 @@
   align-items: center;
 }
 .btn {
+  color: var(--color-light);
   padding: 0.5rem;
   margin: 1rem;
   transition: 250ms ease-in-out background-color;
   &Sex {
     font-size: 1.8rem;
     padding: 1rem 2rem;
-    background-color: royalblue;
+    background-color: var(--color-primary);
     border-radius: 1.5rem;
     &:hover {
-      background-color: lighten(royalblue, 10%);
+      background-color: var(--color-dark-darker);
     }
   }
   &Balance {
@@ -28,9 +30,9 @@
     align-items: center;
     font-size: 3rem;
     padding: 0.5rem;
-    background-color: darken(#323232, 5%);
+    background-color: var(--color-dark-darker);
     &:hover {
-      background-color: darken(#323232, 10%);
+      background-color: darken(colors.$color-dark-darker, 10%);
     }
   }
 }

@@ -1,0 +1,23 @@
+.btn {
+  width: 8rem;
+  height: 4rem;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  background-color: var(--color-dark);
+  &.active {
+    .circle {
+      left: 100%;
+      transform: translateX(-100%);
+    }
+  }
+  .circle {
+    position: relative;
+    left: 0%;
+    transform: translateX(0%);
+    width: 50%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--color-light);
+    transition: 250ms ease-in-out left, 250ms ease-in-out transform;
+  }
+}

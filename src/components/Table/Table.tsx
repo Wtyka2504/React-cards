@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./Table.module.scss";
 type TTable = {
   id: number;
@@ -22,35 +23,69 @@ type TTable = {
     bs: string;
   };
 };
-
-export function Table({ data }: { data: TTable }) {
-  const columns = Object.keys(data);
+export function Table({ data }: { data: TTable[] }) {
+  const [active, setActive] = useState(false);
+  const columns = [
+    "name",
+    "username",
+    "phone number",
+    "email",
+    "address",
+    "website",
+    "company",
+  ];
+  const length = active ? columns.length : 4;
+  const btnText = active ? "Hide" : "Show";
+  const toggleActive = () => {
+    setActive(prev => (prev ? false : true));
+  };
   return (
     <table className={styles.table}>
       <thead>
         <tr className={styles.headings}>
-          <th>name</th>
-          <th>username</th>
-          <th>email</th>
-          <th>phone number</th>
-          <th></th>
+          {columns.slice(0, length).map((col, index) => (
+            <th key={index}>{col}</th>
+          ))}
         </tr>
         <tr>
-          <th className={styles.headingsLine} colSpan={5}></th>
+          <th className={styles.headingsLine} colSpan={length}></th>
         </tr>
       </thead>
       <tbody>
+        {data.map((user, index) => {
+          return (
+            <tr key={index}>
+              <td>{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.phone}</td>
+              <td>{user.email}</td>
+              {active ? (
+                <>
+                  <td>
+                    <p>{user.address.street}</p>
+                    <p>{user.address.city}</p>
+                    <p>{user.address.zipcode}</p>
+                  </td>
+                  <td>{user.website}</td>
+                  <td>{user.company.name}</td>
+                </>
+              ) : undefined}
+            </tr>
+          );
+        })}
+      </tbody>
+      <tfoot>
         <tr>
-          <td>{data.name}</td>
-          <td>{data.username}</td>
-          <td>{data.email}</td>
-          <td>{data.phone}</td>
-          <td>
-            <button>button</button>
+          {columns.slice(1, length).map((_, index) => (
+            <td key={index}></td>
+          ))}
+          <td className={styles.textRight}>
+            <button onClick={toggleActive} className={styles.btn}>
+              {btnText}
+            </button>
           </td>
         </tr>
-        <tr></tr>
-      </tbody>
+      </tfoot>
     </table>
   );
 }

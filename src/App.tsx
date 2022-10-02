@@ -1,3 +1,4 @@
+import type { TTheme } from "./context/ThemeContext";
 import { BrowserRouter, NavLink, Routes, Route } from "react-router-dom";
 import { CardWrapper } from "./components/Card/Card";
 import { Menu } from "./components/Menu/Menu";
@@ -8,10 +9,15 @@ import { Post } from "./components/Post/Post";
 import CardData from "./constants/cards";
 import MenuData from "./constants/menu";
 import FooterData from "./constants/footer";
-import Tabledata from "./constants/table";
+import TableData from "./constants/table";
 import navStyles from "./styles/modules/nav.module.scss";
 import cx from "classnames";
 import { Table } from "./components/Table/Table";
+import { CustomHook } from "./components/CustomHook/CustomHook";
+import { Modal } from "./components/Modal/Modal";
+import { useContext, useState } from "react";
+import { ThemeContext, GetTheme } from "./context/ThemeContext";
+import { ThemeButton } from "./components/ThemeButton/ThemeButton";
 type TNav = {
   [path: string]: {
     name: string;
@@ -49,7 +55,15 @@ const navObject: TNav = {
   },
   table: {
     name: "Table",
-    element: <Table data={Tabledata} />,
+    element: <Table data={TableData} />,
+  },
+  hook: {
+    name: "Hook",
+    element: <CustomHook />,
+  },
+  modal: {
+    name: "Modal",
+    element: <Modal />,
   },
 };
 
@@ -68,44 +82,64 @@ for (const { name, link } of MenuData) {
   };
 }
 function App() {
+  const [theme, setTheme] = useState<TTheme>(
+    useContext(ThemeContext) as TTheme
+  );
   const nav = Object.entries(navObject);
   const routes = Object.entries(routesObject);
+  const themeHandler = () =>
+    setTheme(prev => (prev === "dark" ? "light" : "dark"));
+  console.log(theme);
   return (
-    <BrowserRouter>
-      <nav className={navStyles.nav}>
-        <ul className={navStyles.list}>
-          {nav.map(([to, { name }], index) => {
-            const className = ({ isActive }: { isActive: boolean }) =>
-              isActive ? cx(navStyles.link, navStyles.active) : navStyles.link;
-            return (
-              <li key={index}>
-                <NavLink {...{ className, to: to === "index" ? "/" : to }} end>
-                  {name}
-                </NavLink>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-      <main>
-        <Routes>
-          <Route path="/*">
-            {routes.map(([path, { element }], index) => {
-              const props = path === "index" ? { index: true } : { path };
-              return (
-                <Route
-                  {...{
-                    ...props,
-                  }}
-                  element={element}
-                  key={index}
-                ></Route>
-              );
-            })}
-          </Route>
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <ThemeContext.Provider value={theme}>
+      <div id="page" className={theme}>
+        <BrowserRouter>
+          <nav className={navStyles.nav}>
+            <ul className={navStyles.list}>
+              {nav.map(([to, { name }], index) => {
+                const className = ({ isActive }: { isActive: boolean }) =>
+                  isActive
+                    ? cx(navStyles.link, navStyles.active)
+                    : navStyles.link;
+                return (
+                  <li key={index}>
+                    <NavLink
+                      {...{ className, to: to === "index" ? "/" : to }}
+                      end
+                    >
+                      {name}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+            <ThemeButton
+              onClick={themeHandler}
+              active={theme === "dark"}
+              style={{ placeSelf: "center" }}
+            />
+          </nav>
+          <main>
+            <Routes>
+              <Route path="/*">
+                {routes.map(([path, { element }], index) => {
+                  const props = path === "index" ? { index: true } : { path };
+                  return (
+                    <Route
+                      {...{
+                        ...props,
+                      }}
+                      element={element}
+                      key={index}
+                    ></Route>
+                  );
+                })}
+              </Route>
+            </Routes>
+          </main>
+        </BrowserRouter>
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
