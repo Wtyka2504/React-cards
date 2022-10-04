@@ -25,10 +25,7 @@ export function useGetAPI<T>(
     initialValue,
   ]);
   const setValuesCb = (cb: (val: T) => T) => {
-    setValues(prev => {
-      prev[1] = cb(prev[1]);
-      return [...prev];
-    });
+    setValues(prev => [prev[0], cb(prev[1])]);
   };
   if (isURLValid(url))
     useEffect(() => {
@@ -42,17 +39,10 @@ export function useGetAPI<T>(
           }
         })
         .then(data => {
-          return setValues(prev => {
-            prev[0] = Status.done;
-            data ? (prev[1] = data) : undefined;
-            return [...prev];
-          });
+          return setValues(() => [Status.done, data]);
         })
         .catch(() => {
-          setValues(prev => {
-            prev[0] = Status.error;
-            return [...prev];
-          });
+          setValues(prev => [Status.error, prev[1]]);
         });
     }, []);
   return [value, setValuesCb];
