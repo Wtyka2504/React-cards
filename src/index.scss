@@ -1,4 +1,4 @@
-@use "./styles/colors.scss";
+@import "./styles/colors.scss";
 @import "./styles//fonts.scss";
 @import "./styles/reset.scss";
 
@@ -13,24 +13,22 @@ body {
   height: 100%;
   background-color: var(--color-dark);
   color: var(--light-color);
-  --color-light: #{colors.$color-light};
-  --color-light-lighter: #{colors.$color-light-lighter};
-  --color-light-darker: #{colors.$color-light-darker};
-  --color-dark: #{colors.$color-dark};
-  --color-dark-lighter: #{colors.$color-dark-lighter};
-  --color-dark-darker: #{colors.$color-dark-darker};
-  --color-primary: #{colors.$primary};
-  --color-primary-light: #{colors.$primary-light};
-  --color-primary-dark: #{colors.$primary-dark};
+  --color-light: #{$color-light};
+  --color-light-lighter: #{$color-light-lighter};
+  --color-light-darker: #{$color-light-darker};
+  --color-dark: #{$color-dark};
+  --color-dark-lighter: #{$color-dark-lighter};
+  --color-dark-darker: #{$color-dark-darker};
+  --color-primary: #{$primary};
+  --color-primary-light: #{$primary-light};
+  --color-primary-dark: #{$primary-dark};
   &.dark {
-    --color-light: #{colors.$color-dark};
-    --color-light-lighter: #{colors.$color-dark-lighter};
-    --color-light-darker: #{colors.$color-dark-darker};
-    --color-dark: #{colors.$color-light};
-    --color-dark-lighter: #{colors.$color-light-lighter};
-    --color-dark-darker: #{colors.$color-light-darker};
-    --color-primary-light: #{colors.$primary-dark};
-    --color-primary-dark: #{colors.$primary-light};
+    --color-light: #{$color-dark};
+    --color-light-lighter: #{$color-dark-lighter};
+    --color-light-darker: #{$color-dark-darker};
+    --color-dark: #{$color-light};
+    --color-dark-lighter: #{$color-light-lighter};
+    --color-dark-darker: #{$color-light-darker};
   }
 }
 main {

@@ -16,9 +16,9 @@ export function CustomHook() {
 
   return (
     <div>
-      {status === Status.loading ? <p>Loading...</p> : undefined}
-      {status === Status.error ? <p>Błąd</p> : undefined}
-      {status === Status.done ? <Posts posts={response} /> : undefined}
+      {status === "loading" ? <p>Loading...</p> : undefined}
+      {status === "error" ? <p>Błąd</p> : undefined}
+      {status === "done" ? <Posts posts={response} /> : undefined}
     </div>
   );
 }

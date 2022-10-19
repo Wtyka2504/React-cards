@@ -1,10 +1,7 @@
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export enum Status {
-  loading,
-  done,
-  error,
-}
+export type Status = "idle" | "loading" | "done" | "error";
+
 type TValue<T> = [Status, T];
 function isURLValid(url: any) {
   if (typeof url !== "string") return false;
@@ -16,19 +13,15 @@ function isURLValid(url: any) {
     return false;
   }
 }
-export function useGetAPI<T>(
-  url: string,
-  initialValue: T
-): [TValue<T>, (cb: (val: T) => T) => void] {
-  const [value, setValues] = useState<TValue<T>>([
-    Status.loading,
-    initialValue,
-  ]);
+export function useGetAPI<T>(url: string, initialValue: T) {
+  const [value, setValues] = useState<TValue<T>>(["idle", initialValue]);
   const setValuesCb = (cb: (val: T) => T) => {
     setValues(prev => [prev[0], cb(prev[1])]);
   };
+
   if (isURLValid(url))
     useEffect(() => {
+      setValues(([_, data]) => ["loading", data]);
       fetch(url)
         .then(data => {
           try {
@@ -39,11 +32,12 @@ export function useGetAPI<T>(
           }
         })
         .then(data => {
-          return setValues(() => [Status.done, data]);
+          return setValues(() => ["done", data]);
         })
         .catch(() => {
-          setValues(prev => [Status.error, prev[1]]);
+          setValues(prev => ["error", prev[1]]);
         });
     }, []);
+
   return [value, setValuesCb];
 }

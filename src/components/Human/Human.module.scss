@@ -11,7 +11,7 @@
   align-items: center;
 }
 .btn {
-  color: var(--color-light);
+  color: colors.$color-light;
   padding: 0.5rem;
   margin: 1rem;
   transition: 250ms ease-in-out background-color;
@@ -21,18 +21,19 @@
     background-color: var(--color-primary);
     border-radius: 1.5rem;
     &:hover {
-      background-color: var(--color-dark-darker);
+      background-color: var(--color-primary-light);
     }
   }
   &Balance {
+    color: var(--color-light-lighter);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3rem;
     padding: 0.5rem;
-    background-color: var(--color-dark-darker);
+    background-color: var(--color-dark);
     &:hover {
-      background-color: darken(colors.$color-dark-darker, 10%);
+      background-color: var(--color-dark-darker);
     }
   }
 }
