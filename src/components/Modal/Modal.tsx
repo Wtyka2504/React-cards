@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import btnStyles from "../../styles/modules/button.module.scss";
-import styles from "../Modal/Modal.module.scss";
 import cx from "classnames";
+import btnStyles from "../../styles/modules/button.module.scss";
+import styles from "./Modal.module.scss";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
 export function Modal(props: any) {
@@ -15,13 +15,11 @@ export function Modal(props: any) {
           Show Modal
         </button>
       </div>
-      {
-        <div className={cx(styles.modal, open ? styles.active : "")}>
-          <div ref={modalRef} className={styles.wrapper}>
-            ModalBox
-          </div>
+      <div className={cx(styles.modal, open ? styles.active : "")}>
+        <div ref={modalRef} className={styles.wrapper}>
+          ModalBox
         </div>
-      }
+      </div>
     </>
   );
 }

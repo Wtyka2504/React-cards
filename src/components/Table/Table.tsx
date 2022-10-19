@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./Table.module.scss";
+
 type TTable = {
   id: number;
   name: string;
@@ -37,7 +38,7 @@ export function Table({ data }: { data: TTable[] }) {
   const length = active ? columns.length : 4;
   const btnText = active ? "Hide" : "Show";
   const toggleActive = () => {
-    setActive(prev => (prev ? false : true));
+    setActive(prev => (!prev));
   };
   return (
     <table className={styles.table}>
@@ -48,36 +49,34 @@ export function Table({ data }: { data: TTable[] }) {
           ))}
         </tr>
         <tr>
-          <th className={styles.headingsLine} colSpan={length}></th>
+          <th className={styles.headingsLine} colSpan={length} />
         </tr>
       </thead>
       <tbody>
-        {data.map((user, index) => {
-          return (
-            <tr key={index}>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-              <td>{user.phone}</td>
-              <td>{user.email}</td>
-              {active ? (
-                <>
-                  <td>
-                    <p>{user.address.street}</p>
-                    <p>{user.address.city}</p>
-                    <p>{user.address.zipcode}</p>
-                  </td>
-                  <td>{user.website}</td>
-                  <td>{user.company.name}</td>
-                </>
-              ) : undefined}
-            </tr>
-          );
-        })}
+        {data.map((user, index) => (
+          <tr key={index}>
+            <td>{user.name}</td>
+            <td>{user.username}</td>
+            <td>{user.phone}</td>
+            <td>{user.email}</td>
+            {active ? (
+              <>
+                <td>
+                  <p>{user.address.street}</p>
+                  <p>{user.address.city}</p>
+                  <p>{user.address.zipcode}</p>
+                </td>
+                <td>{user.website}</td>
+                <td>{user.company.name}</td>
+              </>
+            ) : undefined}
+          </tr>
+        ))}
       </tbody>
       <tfoot>
         <tr>
           {columns.slice(1, length).map((_, index) => (
-            <td key={index}></td>
+            <td key={index} />
           ))}
           <td className={styles.textRight}>
             <button onClick={toggleActive} className={styles.btn}>

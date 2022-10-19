@@ -18,16 +18,22 @@ function Message({ text }: { text: string | undefined }) {
 export function Posts({ posts }: { posts: TPost[] }) {
   return (
     <div className={styles.grid}>
-      {posts.map(({ userId, id, title, body }, index) => {
-        return (
-          <div className={styles.card} key={index}>
-            <p className={styles.cardId}>ID: {id}</p>
-            <p className={styles.cardUserId}>USERID: {userId}</p>
-            <p className={styles.cardTitle}>{title}</p>
-            <p className={styles.cardBody}>{body}</p>
-          </div>
-        );
-      })}
+      {posts.map(({
+        userId, id, title, body,
+      }, index) => (
+        <div className={styles.card} key={index}>
+          <p className={styles.cardId}>
+            ID:
+            {id}
+          </p>
+          <p className={styles.cardUserId}>
+            USERID:
+            {userId}
+          </p>
+          <p className={styles.cardTitle}>{title}</p>
+          <p className={styles.cardBody}>{body}</p>
+        </div>
+      ))}
     </div>
   );
 }

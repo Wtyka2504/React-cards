@@ -1,45 +1,44 @@
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, {
+  createContext, ReactNode, useContext, useState,
+} from "react";
+import {
+  saveItemLocalStorage,
+  getItemLocalStorage,
+} from "../utils/localStorage";
+import { getSystemTheme } from "../utils/system";
+
 type Theme = "dark" | "light";
-type ThemeProviderProps = { children?: any };
-type ThemeContext = [Theme, () => void];
+type ThemeProviderProps = { children?: ReactNode };
+type ThemeContext = { theme: Theme; handleChangeTheme: () => void } | undefined;
 const ThemeLocalName = "mode";
 
 const getTheme = () => {
-  const localTheme = localStorage.getItem(ThemeLocalName) || getSystemTheme();
+  const localTheme = getItemLocalStorage(ThemeLocalName) || getSystemTheme();
 
-  if (isThemeValid(localTheme) === true) return localTheme as Theme;
+  if (localTheme === "dark" || localTheme === "light") return localTheme;
   return "dark";
 };
 
-const getSystemTheme = () => {
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const isLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+export function useThemeContext() {
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useCount must be used within a CountProvider");
+  }
+  return context;
+}
 
-  if (!isDark && !isLight) return undefined;
-
-  return isDark ? ("dark" as Theme) : ("light" as Theme);
-};
-
-const isThemeValid = (value: string | null | undefined) => {
-  return (["dark", "light"] as Theme[]).some(theme => theme === value);
-};
-
-const saveThemeLocally = (value: Theme) => {
-  localStorage.setItem(ThemeLocalName, value);
-};
-
-export const ThemeContext = createContext<ThemeContext>(["dark", () => {}]);
+export const ThemeContext = createContext<ThemeContext>(undefined);
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(getTheme());
-  const handler = () => {
+  const handleChangeTheme = () => {
     const value = theme === "dark" ? "light" : "dark";
-    console.log(theme);
+
     setTheme(value);
-    saveThemeLocally(value);
+    saveItemLocalStorage(ThemeLocalName, value);
   };
   return (
-    <ThemeContext.Provider value={[theme, handler]}>
+    <ThemeContext.Provider value={{ theme, handleChangeTheme }}>
       {children}
     </ThemeContext.Provider>
   );

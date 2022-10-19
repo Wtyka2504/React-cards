@@ -1,7 +1,10 @@
-import styles from "./card.module.scss";
 import cx from "classnames";
+import styles from "./card.module.scss";
 import type { TCard, TCardWrapper } from "./TCard";
-export function Card({ name, surname, avatar, rewards, background }: TCard) {
+
+export function Card({
+  name, surname, avatar, rewards, background,
+}: TCard) {
   return (
     <div className={styles.card}>
       <header style={{ backgroundImage: `url(${background})` }}>
@@ -12,10 +15,10 @@ export function Card({ name, surname, avatar, rewards, background }: TCard) {
         <div
           style={{ backgroundImage: `url(${avatar})` }}
           className={styles.avatar}
-        ></div>
+        />
       </header>
       <footer className={styles.rewards}>
-        <p className={styles.title}></p>
+        <p className={styles.title} />
         <div className={styles.rewardsList}>
           {Object.entries(rewards).map(([key, value], index) => {
             if (value === 0) return;
@@ -27,7 +30,7 @@ export function Card({ name, surname, avatar, rewards, background }: TCard) {
                 key={index}
                 className={cx(
                   styles.rewardsItem,
-                  styles[`rewardsItem${classExtend}`]
+                  styles[`rewardsItem${classExtend}`],
                 )}
               >
                 <p className={styles.rewardsAmount}>{value}</p>
@@ -43,9 +46,7 @@ export function Card({ name, surname, avatar, rewards, background }: TCard) {
 export function CardWrapper({ children }: TCardWrapper) {
   return (
     <div className={styles.wrapper}>
-      {children.map((props, index) => {
-        return <Card {...props} key={index} />;
-      })}
+      {children.map((props, index) => <Card {...props} key={index} />)}
     </div>
   );
 }

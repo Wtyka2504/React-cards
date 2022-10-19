@@ -7,55 +7,54 @@ import { PageMenu } from "../Pages/Menu";
 import { PageModal } from "../Pages/Modal";
 import { PagePost } from "../Pages/Post";
 import { PageTable } from "../Pages/Table";
-import type { PagesNav } from "../types/PagesNav";
 
 type TRouters = RouteObject & { name: string; end?: boolean };
+
 export const routers: TRouters[] = [
   {
     path: "/",
     name: "Cards",
-    element: <PageCards></PageCards>,
+    element: <PageCards />,
     index: true,
+    end: true,
   },
   {
     path: "human",
     name: "Human",
-    element: <PageHuman></PageHuman>,
+    element: <PageHuman />,
   },
   {
     path: "Menu",
     name: "Menu",
-    element: <PageMenu></PageMenu>,
+    element: <PageMenu />,
   },
   {
     path: "footer",
     name: "Footer",
-    element: <PageFooterGeneric></PageFooterGeneric>,
+    element: <PageFooterGeneric />,
   },
   {
     path: "customhook",
     name: "Custom Hook",
-    element: <PageCustomHook></PageCustomHook>,
+    element: <PageCustomHook />,
   },
   {
     path: "modal",
     name: "Modal",
-    element: <PageModal></PageModal>,
+    element: <PageModal />,
   },
   {
     path: "post",
     name: "Post",
-    element: <PagePost></PagePost>,
+    element: <PagePost />,
   },
   {
     path: "table",
     name: "Table",
-    element: <PageTable></PageTable>,
+    element: <PageTable />,
   },
 ];
 
-export const BrowserRouter = createBrowserRouter(
-  routers.map(({ path, index, element }) => {
-    return { path, index, element };
-  })
+export const BrowserRouters = createBrowserRouter(
+  routers.map(({ path, index, element }) => ({ path, index, element })),
 );

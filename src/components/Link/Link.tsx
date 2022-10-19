@@ -1,5 +1,6 @@
-import style from "./Link.module.scss";
 import cx from "classnames";
+import style from "./Link.module.scss";
+
 type TLink = {
   href: string;
   name: string;

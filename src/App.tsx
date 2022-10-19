@@ -1,21 +1,22 @@
-import { useContext } from "react";
-import { ThemeContext } from "./context/ThemeContext";
-import { BrowserRouter, routers } from "./Routers/routers";
-import { PagesNav } from "./components/Nav/Pages/Pages";
-import { RouterProvider } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { useThemeContext } from "./context/ThemeContext";
+import { routers } from "./Routers/routers";
+import { PagesNav } from "./components/Nav/Pages";
 import type { PagesNav as TPagesNav } from "./types/PagesNav";
 
 function App() {
-  const [theme, _] = useContext(ThemeContext);
-  const routes: TPagesNav[] = routers.map(({ path, end, name }) => {
-    return { to: path as string, name, end: end ? end : undefined };
-  });
+  const { theme } = useThemeContext();
+  const routes: TPagesNav[] = routers.map(({ path, end, name }) => ({ to: path as string, name, end: end || undefined }));
 
   return (
     <div id="page" className={theme === "dark" ? theme : undefined}>
-      <PagesNav routes={routes}></PagesNav>
+      <PagesNav routes={routes} />
       <main>
-        <RouterProvider router={BrowserRouter}></RouterProvider>
+        <Routes>
+          {routers.map(({ path, element, index }, key) => (
+            <Route path={path} element={element} key={key} index={index} />
+          ))}
+        </Routes>
       </main>
     </div>
   );

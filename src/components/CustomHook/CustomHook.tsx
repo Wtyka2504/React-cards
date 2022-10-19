@@ -10,7 +10,7 @@ type TResponse = {
 export function CustomHook() {
   const [values, setValues] = useGetAPI<TResponse[]>(
     "https://jsonplaceholder.typicode.com/posts",
-    []
+    [],
   );
   const [status, response] = values;
 

@@ -2,8 +2,9 @@ import { ReactNode } from "react";
 import { IconType } from "react-icons";
 import { FaTwitterSquare, FaInstagramSquare } from "react-icons/fa";
 import { GrFacebook, GrStatusUnknown } from "react-icons/gr";
-import styles from "./Footer.module.scss";
 import cx from "classnames";
+import styles from "./Footer.module.scss";
+
 type TCompany = {
   addressLine1: string;
   addressLine2: string;
@@ -32,14 +33,17 @@ type TFooter = {
 };
 
 export function Company(company: TCompany) {
-  if (company === undefined)
+  if (company === undefined) {
     return (
       <>
-        <div className={styles.company}></div>
-        <div className={styles.contact}></div>
+        <div className={styles.company} />
+        <div className={styles.contact} />
       </>
     );
-  const { addressLine1, addressLine2, phone, mail, name, logo } = company;
+  }
+  const {
+    addressLine1, addressLine2, phone, mail, name, logo,
+  } = company;
   const isURLValid = (url: string) => {
     try {
       return Boolean(new URL(logo));
@@ -69,38 +73,32 @@ export function Company(company: TCompany) {
   );
 }
 export function Links(links: TLinks) {
-  if (links === undefined) return <div className={styles.links}></div>;
-  const linksEntries = Object.entries(links),
-    maxLinksPerColumn = 5,
-    listsLength = Math.ceil(linksEntries.length / maxLinksPerColumn),
-    lists = Array.apply(null, Array(listsLength));
+  if (links === undefined) return <div className={styles.links} />;
+  const linksEntries = Object.entries(links);
+  const maxLinksPerColumn = 5;
+  const listsLength = Math.ceil(linksEntries.length / maxLinksPerColumn);
+  const lists = Array.apply(null, Array(listsLength));
 
   return (
     <div className={styles.links}>
       <p className={styles.title}>Links</p>
       <div className={styles.linksListWrapper}>
         {lists
-          .map((_, i) => {
-            return linksEntries.slice(
-              i * maxLinksPerColumn,
-              (i + 1) * maxLinksPerColumn
-            );
-          })
-          .map((list, listIndex) => {
-            return (
-              <ul key={listIndex} className={styles.linksList}>
-                {list.map(([name, url], itemIndex) => {
-                  return (
-                    <li key={itemIndex} className={styles.linksItem}>
-                      <a href={url} target="_self" className={styles.linkLink}>
-                        {name}
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
-            );
-          })}
+          .map((_, i) => linksEntries.slice(
+            i * maxLinksPerColumn,
+            (i + 1) * maxLinksPerColumn,
+          ))
+          .map((list, listIndex) => (
+            <ul key={listIndex} className={styles.linksList}>
+              {list.map(([name, url], itemIndex) => (
+                <li key={itemIndex} className={styles.linksItem}>
+                  <a href={url} target="_self" className={styles.linkLink}>
+                    {name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ))}
       </div>
     </div>
   );
@@ -111,29 +109,27 @@ export function Socials(socials: TSocials) {
     instagram: <FaInstagramSquare className={styles.instagram} />,
     twitter: <FaTwitterSquare className={styles.twitter} />,
   };
-  if (socials === undefined) return <div className={styles.socials}></div>;
+  if (socials === undefined) return <div className={styles.socials} />;
   return (
     <div className={styles.socials}>
       <p className={styles.title}>Socials</p>
       <ul className={styles.socialsList}>
-        {Object.entries(socials).map(([key, value], index) => {
-          return (
-            <li className={styles.socialsItem} key={index}>
-              <a href={value} className={styles.socialsLink} target="_blank">
-                <div className={styles.columnCenter}>
-                  <span className={styles.socialIcon}>
-                    {icons[key] ? (
-                      icons[key]
-                    ) : (
-                      <GrStatusUnknown className={styles.unknown} />
-                    )}
-                  </span>
-                  <p className={styles.socialIconName}>{key}</p>
-                </div>
-              </a>
-            </li>
-          );
-        })}
+        {Object.entries(socials).map(([key, value], index) => (
+          <li className={styles.socialsItem} key={index}>
+            <a href={value} className={styles.socialsLink} target="_blank" rel="noreferrer">
+              <div className={styles.columnCenter}>
+                <span className={styles.socialIcon}>
+                  {icons[key] ? (
+                    icons[key]
+                  ) : (
+                    <GrStatusUnknown className={styles.unknown} />
+                  )}
+                </span>
+                <p className={styles.socialIconName}>{key}</p>
+              </div>
+            </a>
+          </li>
+        ))}
       </ul>
     </div>
   );

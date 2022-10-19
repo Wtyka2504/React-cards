@@ -19,7 +19,7 @@ export function MenuItem({ name, link }: TMenuItem) {
 
 export function Menu({ children }: TMenu) {
   return (
-    <ul className={styles["menu"]}>
+    <ul className={styles.menu}>
       {children.map(({ name, link }, index) => (
         <MenuItem key={index} name={name} link={link} />
       ))}
