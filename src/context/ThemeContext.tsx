@@ -1,6 +1,4 @@
-import React, {
-  createContext, ReactNode, useContext, useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import {
   saveItemLocalStorage,
   getItemLocalStorage,
@@ -9,7 +7,9 @@ import { getSystemTheme } from "../utils/system";
 
 type Theme = "dark" | "light";
 type ThemeProviderProps = { children?: ReactNode };
-type ThemeContext = { theme: Theme; handleChangeTheme: () => void } | undefined;
+type TThemeContext =
+  | { theme: Theme; handleChangeTheme: () => void }
+  | undefined;
 const ThemeLocalName = "mode";
 
 const getTheme = () => {
@@ -18,6 +18,7 @@ const getTheme = () => {
   if (localTheme === "dark" || localTheme === "light") return localTheme;
   return "dark";
 };
+export const ThemeContext = createContext<TThemeContext>(undefined);
 
 export function useThemeContext() {
   const context = useContext(ThemeContext);
@@ -26,8 +27,6 @@ export function useThemeContext() {
   }
   return context;
 }
-
-export const ThemeContext = createContext<ThemeContext>(undefined);
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(getTheme());

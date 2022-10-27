@@ -1,6 +1,4 @@
-import {
-  useEffect, useRef, MutableRefObject, RefObject,
-} from "react";
+import { useEffect, useRef } from "react";
 
 export function useClickOutside(callback: () => void) {
   const node = useRef<HTMLDivElement>(null);

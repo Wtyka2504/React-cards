@@ -4,6 +4,7 @@
     "es2021": true
   },
   "extends": [
+    "prettier",
     "airbnb",
     "airbnb-typescript",
     "airbnb/hooks",
@@ -19,8 +20,17 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "linebreak-style": ["error", "windows"],
     "quotes": ["error", "double"],
     "@typescript-eslint/quotes": ["error", "double"],
-    "arrow-parens": ["error", "as-needed"]
-  }
+    "arrow-parens": ["error", "as-needed"],
+    "import/prefer-default-export": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "object-curly-newline": ["error", { "multiline": true }],
+    "react/jsx-no-constructed-context-values": "off",
+    "react/no-array-index-key": "off"
+  },
+  "ignorePatterns": ["vite.config.*"]
 }
